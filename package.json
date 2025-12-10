@@ -13,7 +13,7 @@
     "cucumber:irctc": "cucumber-js features/irctc.feature",
     "cucumber:report": "node scripts/generateReport.js",
     "irctc:book": "ts-node scripts/irctcBookingAutomation.ts",
-    "generate:report": "node scripts/generateReport.js",
+    "generate:report": "node scripts/generateReport.ts",
     "test:all": "npm run test && npm run generate:report"
   },
   "keywords": [
@@ -26,7 +26,7 @@
   ],
   "author": "",
   "license": "ISC",
-  "type": "commonjs",
+  "type": "module",
   "devDependencies": {
     "@cucumber/cucumber": "^9.6.0",
     "@playwright/test": "^1.57.0",
