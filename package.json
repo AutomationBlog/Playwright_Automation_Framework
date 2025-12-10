@@ -11,7 +11,7 @@
     "test:irctc": "playwright test tests/irctc.spec.ts --headed",
     "cucumber": "cucumber-js",
     "cucumber:irctc": "cucumber-js features/irctc.feature",
-    "cucumber:report": "node scripts/generateReport.js",
+    "cucumber:report": "node scripts/generateReport.ts",
     "irctc:book": "ts-node scripts/irctcBookingAutomation.ts",
     "generate:report": "node scripts/generateReport.ts",
     "test:all": "npm run test && npm run generate:report"
