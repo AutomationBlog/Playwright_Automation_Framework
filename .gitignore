@@ -7,7 +7,6 @@ node_modules/
 /playwright/.cache/
 /playwright/.auth/
 /reports
-/playwright-report/
 /screenshots/
 /logs/
 
