@@ -1,0 +1,40 @@
+{
+  "name": "playwright_automation_framework",
+  "version": "1.0.0",
+  "description": "E2E Automation Framework using Playwright, TypeScript, POM, Cucumber with Extended HTML Reports",
+  "main": "index.js",
+  "scripts": {
+    "test": "playwright test",
+    "test:headed": "playwright test --headed",
+    "test:debug": "playwright test --debug",
+    "test:report": "playwright show-report",
+    "test:irctc": "playwright test tests/irctc.spec.ts --headed",
+    "cucumber": "cucumber-js",
+    "cucumber:irctc": "cucumber-js features/irctc.feature",
+    "cucumber:report": "node scripts/generateReport.js",
+    "irctc:book": "ts-node scripts/irctcBookingAutomation.ts",
+    "generate:report": "node scripts/generateReport.js",
+    "test:all": "npm run test && npm run generate:report"
+  },
+  "keywords": [
+    "playwright",
+    "typescript",
+    "automation",
+    "testing",
+    "cucumber",
+    "pom"
+  ],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "devDependencies": {
+    "@cucumber/cucumber": "^9.6.0",
+    "@playwright/test": "^1.57.0",
+    "@types/cucumber": "^7.0.3",
+    "@types/node": "^24.10.1",
+    "cucumber-html-reporter": "^5.5.0",
+    "dotenv": "^16.3.1",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.3.3"
+  }
+}
