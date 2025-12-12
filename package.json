@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "test": "node -e \"require('fs').mkdirSync('reports', { recursive: true })\" && cucumber-js test && npm run generate-report",
+    "test": "node -e \"require('fs').mkdirSync('reports', { recursive: true })\" && cucumber-js --tags @regression && npm run generate-report",
     "test-debug": "node -e \"require('fs').mkdirSync('reports', { recursive: true })\" && cucumber-js test --tags @debug && npm run generate-report",
     "install-playwright": "npx playwright install",
     "generate-report": "node report/generateReport.js"
