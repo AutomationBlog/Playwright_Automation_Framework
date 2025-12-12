@@ -6,3 +6,4 @@ reports/
 *.tgz
 /.idea/
 .vscode/
+/.env
