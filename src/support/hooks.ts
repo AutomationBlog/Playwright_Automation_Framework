@@ -9,20 +9,42 @@ let browser: any = null;
 BeforeAll(async function () {
   logger.info('[HOOKS] Launching browser');
 
-  // prefer a local Chrome/Chromium if provided via env or default installation path
-  const defaultChromePath = 'C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe';
-  let chromePath: string | undefined = process.env.CHROME_PATH || defaultChromePath;
+  // Load .env into process.env (simple parser; avoids adding a dependency)
+  try {
+    const envPath = path.join(process.cwd(), '.env');
+    if (fs.existsSync(envPath)) {
+      const raw = (await fs.readFile(envPath, 'utf8')).split(/\r?\n/);
+      for (const line of raw) {
+        const trimmed = line.trim();
+        if (!trimmed || trimmed.startsWith('#')) continue;
+        const idx = trimmed.indexOf('=');
+        if (idx === -1) continue;
+        const key = trimmed.slice(0, idx).trim();
+        let val = trimmed.slice(idx + 1).trim();
+        if ((val.startsWith('"') && val.endsWith('"')) || (val.startsWith("'") && val.endsWith("'"))) {
+          val = val.slice(1, -1);
+        }
+        if (!process.env[key]) process.env[key] = val;
+      }
+    }
+  } catch (e) {
+    logger.warn(`[HOOKS] Failed to load .env: ${e}`);
+  }
+
+  // prefer a local Chrome/Chromium if provided via env
+  let chromePath: string | undefined = process.env.CHROME_PATH;
   if (chromePath && !fs.existsSync(chromePath)) {
+    logger.warn(`[HOOKS] CHROME_PATH set but executable not found: ${chromePath}`);
     chromePath = undefined;
   }
 
   const launchOptions: any = {
-    headless: false,
+    headless: process.env.HEADLESS ? process.env.HEADLESS === 'true' : false,
     // Add flags to start the browser maximized / fullscreen on supported platforms
     args: ['--no-sandbox', '--disable-setuid-sandbox', '--start-maximized', '--start-fullscreen'],
     ignoreDefaultArgs: ['--disable-extensions'],
     devtools: false,
-    slowMo: 50,
+    slowMo: process.env.SLOW_MO ? Number(process.env.SLOW_MO) : 50,
   };
 
   if (chromePath) {
