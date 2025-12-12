@@ -25,7 +25,7 @@ When('I search for {string}', async function (this: any, searchTerm: string) {
   try { await this.attach(`[LOG] When: searched for ${searchTerm}`, 'text/plain'); } catch (_) {}
 });
 
-When('I open the first search result', async function (this: any) {
+Then('I open the first search result', async function (this: any) {
   logger.info('[WHEN] Opening first search result');
   if (!this.page) throw new Error('Page not initialized');
   const results = new SearchResultsPage(this.page);
@@ -34,7 +34,7 @@ When('I open the first search result', async function (this: any) {
   try { await this.attach('[LOG] When: opened first search result', 'text/plain'); } catch (_) {}
 });
 
-When('I add the product to the cart', async function (this: any) {
+Then('I add the product to the cart', async function (this: any) {
   logger.info('[WHEN] Adding product to cart');
   if (!this.page) throw new Error('Page not initialized');
   const product = new ProductPage(this.page);
