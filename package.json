@@ -3,8 +3,10 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "test": "node -e \"require('fs').mkdirSync('reports', { recursive: true })\" && cucumber-js --require-module ts-node/register/transpile-only --require support/world.ts --require support/hooks.ts --require features/step_definitions/**/*.ts --format json:reports/cucumber_report.json features/**/*.feature && node report/generateReport.js",
-    "install-playwright": "npx playwright install"
+    "test": "node -e \"require('fs').mkdirSync('reports', { recursive: true })\" && cucumber-js test && npm run generate-report",
+    "test-debug": "node -e \"require('fs').mkdirSync('reports', { recursive: true })\" && cucumber-js test --tags @debug && npm run generate-report",
+    "install-playwright": "npx playwright install",
+    "generate-report": "node report/generateReport.js"
   },
   "dependencies": {
     "@cucumber/cucumber": "^8.8.0",
