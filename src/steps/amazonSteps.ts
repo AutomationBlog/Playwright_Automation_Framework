@@ -13,6 +13,7 @@ Given('I open the Amazon home page', async function (this: any) {
   const home = new HomePage(this.page);
   await home.open();
   logger.info('[GIVEN] Amazon home page opened successfully');
+  try { await this.attach('[LOG] Given: Amazon home page opened successfully', 'text/plain'); } catch (_) {}
 });
 
 When('I search for {string}', async function (this: any, searchTerm: string) {
@@ -21,6 +22,7 @@ When('I search for {string}', async function (this: any, searchTerm: string) {
   const home = new HomePage(this.page);
   await home.search(searchTerm);
   logger.info(`[WHEN] Search for '${searchTerm}' completed`);
+  try { await this.attach(`[LOG] When: searched for ${searchTerm}`, 'text/plain'); } catch (_) {}
 });
 
 When('I open the first search result', async function (this: any) {
@@ -29,6 +31,7 @@ When('I open the first search result', async function (this: any) {
   const results = new SearchResultsPage(this.page);
   await results.openFirstResult();
   logger.info('[WHEN] First search result opened successfully');
+  try { await this.attach('[LOG] When: opened first search result', 'text/plain'); } catch (_) {}
 });
 
 When('I add the product to the cart', async function (this: any) {
@@ -37,6 +40,7 @@ When('I add the product to the cart', async function (this: any) {
   const product = new ProductPage(this.page);
   await product.addToCart();
   logger.info('[WHEN] Product added to cart successfully');
+  try { await this.attach('[LOG] When: product added to cart', 'text/plain'); } catch (_) {}
 });
 
 Then('the cart should contain at least {int} item', async function (this: any, count: number) {
@@ -48,4 +52,5 @@ Then('the cart should contain at least {int} item', async function (this: any, c
   logger.info(`[THEN] Cart contains ${items} item(s)`);
   expect(items).to.be.at.least(count);
   logger.info(`[THEN] Assertion passed: cart has ${items} items (expected >= ${count})`);
+  try { await this.attach(`[LOG] Then: cart has ${items} items (expected >= ${count})`, 'text/plain'); } catch (_) {}
 });
