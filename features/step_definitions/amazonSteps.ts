@@ -1,10 +1,10 @@
 import { Given, When, Then } from '@cucumber/cucumber';
 import { expect } from 'chai';
-import logger from '../utils/logger';
-import { HomePage } from '../pages/HomePage';
-import { SearchResultsPage } from '../pages/SearchResultsPage';
-import { ProductPage } from '../pages/ProductPage';
-import { CartPage } from '../pages/CartPage';
+import logger from '../../utils/logger';
+import { HomePage } from '../../pages/HomePage';
+import { SearchResultsPage } from '../../pages/SearchResultsPage';
+import { ProductPage } from '../../pages/ProductPage';
+import { CartPage } from '../../pages/CartPage';
 // Avoid importing the support world to prevent double-loading Cucumber.
 
 Given('I open the Amazon home page', async function (this: any) {

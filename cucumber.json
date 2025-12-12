@@ -9,7 +9,7 @@
             "features/**/*.feature"
         ],
         "require": [
-            "step_definitions/*.ts",
+            "features/step_definitions/*.ts",
             "support/world.ts",
             "support/hooks.ts"
         ],
