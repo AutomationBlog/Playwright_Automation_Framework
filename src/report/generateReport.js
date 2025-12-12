@@ -30,6 +30,7 @@ try {
 
 const nodeVersion = process.version;
 const platform = `${os.type()} ${os.release()} (${os.arch()})`;
+const deviceType = os.hostname();
 const user =
   (os.userInfo && os.userInfo().username) ||
   process.env.USER ||
@@ -69,7 +70,7 @@ generate({
       name: "Chrome",
       version: "143",
     },
-    device: "Local machine",
+    device: deviceType,
     platform: {
       name: os.type(),
       version: os.release(),
