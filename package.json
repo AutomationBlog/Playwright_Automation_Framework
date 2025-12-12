@@ -1,0 +1,26 @@
+{
+  "name": "playwright-cucumber-framework",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "test": "node -e \"require('fs').mkdirSync('reports', { recursive: true })\" && cucumber-js --require-module ts-node/register --require src/support/world.ts --require src/support/hooks.ts --require src/steps/**/*.ts --format json:reports/cucumber_report.json features/**/*.feature && node src/report/generateReport.js",
+    "install-playwright": "npx playwright install"
+  },
+  "dependencies": {
+    "@cucumber/cucumber": "^8.8.0",
+    "fs-extra": "^11.1.1",
+    "multiple-cucumber-html-reporter": "^1.20.0",
+    "playwright": "^1.45.0",
+    "winston": "^3.8.2",
+    "xlsx": "^0.18.5"
+  },
+  "devDependencies": {
+    "@types/chai": "^5.2.3",
+    "@types/fs-extra": "^11.0.4",
+    "@types/node": "^18.16.3",
+    "@types/winston": "^2.4.4",
+    "chai": "^6.2.1",
+    "ts-node": "^10.9.1",
+    "typescript": "^4.9.5"
+  }
+}
