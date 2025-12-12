@@ -6,6 +6,7 @@ const reportDir = path.join(process.cwd(), "reports", "html-report");
 const fs = require("fs");
 const os = require("os");
 const child = require("child_process");
+const { report } = require("process");
 
 // try to read the logger file and include in report custom data
 let logContents = null;
@@ -76,4 +77,7 @@ generate({
       version: os.release(),
     },
   },
+  reportName: "Playwright Cucumber Test Report",
+  pageTitle: "Playwright Cucumber Test Report",
+  reportPageTitle: "Playwright Cucumber Test Report",
 });
