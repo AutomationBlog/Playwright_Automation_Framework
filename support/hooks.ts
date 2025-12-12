@@ -10,6 +10,16 @@ let browser: any = null;
 BeforeAll(async function () {
   logger.info('[HOOKS] Launching browser');
 
+  // Clean up old screenshots so each test run starts fresh
+  try {
+    const screenshotsDir = path.join(process.cwd(), 'reports', 'screenshots');
+    await fs.ensureDir(screenshotsDir);
+    await fs.emptyDir(screenshotsDir);
+    logger.info(`[HOOKS] Cleared screenshots directory: ${screenshotsDir}`);
+  } catch (e) {
+    logger.warn(`[HOOKS] Failed to clean screenshots directory: ${e}`);
+  }
+
   // Load .env into process.env
   try {
     dotenv.config();
