@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "test": "node -e \"require('fs').mkdirSync('reports', { recursive: true })\" && cucumber-js --require-module ts-node/register/transpile-only --require src/support/world.ts --require src/support/hooks.ts --require src/steps/**/*.ts --format json:reports/cucumber_report.json src/features/**/*.feature && node src/report/generateReport.js",
+    "test": "node -e \"require('fs').mkdirSync('reports', { recursive: true })\" && cucumber-js --require-module ts-node/register/transpile-only --require support/world.ts --require support/hooks.ts --require step_definitions/**/*.ts --format json:reports/cucumber_report.json features/**/*.feature && node report/generateReport.js",
     "install-playwright": "npx playwright install"
   },
   "dependencies": {
