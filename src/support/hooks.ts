@@ -3,32 +3,18 @@ import { chromium } from 'playwright';
 import fs from 'fs-extra';
 import path from 'path';
 import logger from '../utils/logger';
+import dotenv from 'dotenv';
 
 let browser: any = null;
 
 BeforeAll(async function () {
   logger.info('[HOOKS] Launching browser');
 
-  // Load .env into process.env (simple parser; avoids adding a dependency)
+  // Load .env into process.env
   try {
-    const envPath = path.join(process.cwd(), '.env');
-    if (fs.existsSync(envPath)) {
-      const raw = (await fs.readFile(envPath, 'utf8')).split(/\r?\n/);
-      for (const line of raw) {
-        const trimmed = line.trim();
-        if (!trimmed || trimmed.startsWith('#')) continue;
-        const idx = trimmed.indexOf('=');
-        if (idx === -1) continue;
-        const key = trimmed.slice(0, idx).trim();
-        let val = trimmed.slice(idx + 1).trim();
-        if ((val.startsWith('"') && val.endsWith('"')) || (val.startsWith("'") && val.endsWith("'"))) {
-          val = val.slice(1, -1);
-        }
-        if (!process.env[key]) process.env[key] = val;
-      }
-    }
+    dotenv.config();
   } catch (e) {
-    logger.warn(`[HOOKS] Failed to load .env: ${e}`);
+    logger.warn(`[HOOKS] Failed to load .env via dotenv: ${e}`);
   }
 
   // prefer a local Chrome/Chromium if provided via env

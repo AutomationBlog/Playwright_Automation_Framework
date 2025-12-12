@@ -12,6 +12,7 @@
     "multiple-cucumber-html-reporter": "^1.20.0",
     "playwright": "^1.45.0",
     "winston": "^3.8.2",
+    "dotenv": "^16.1.4",
     "xlsx": "^0.18.5"
   },
   "devDependencies": {
