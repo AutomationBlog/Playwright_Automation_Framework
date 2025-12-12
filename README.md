@@ -2,75 +2,61 @@
 
 ## Overview
 
-This repository contains a Playwright + Cucumber (BDD) test automation framework using TypeScript.
-Tests and feature files live under `src/features` and step definitions under `src/steps`.
+This repository is a Playwright + Cucumber (Gherkin) E2E framework using TypeScript.
+
+Files have been organized at repository root for simplicity. Key folders:
+
+- `features/` — Gherkin `.feature` files (examples under `features/`).
+- `features/step_definitions/` — TypeScript step definitions (`Given/When/Then`).
+- `pages/` — Page object classes (HomePage, ProductPage, etc.).
+- `support/` — Cucumber `world` and `hooks` for setup/teardown.
+- `report/` — Report generation script (`generateReport.js`).
+- `reports/` — Generated reports and artifacts (JSON, HTML, screenshots, logs).
+- `utils/` — Helper utilities (logger, json/excel utils).
 
 ## Prerequisites
 
-Node.js (14+), npm
+Node.js (14+) and npm
 
 Install dependencies:
 
 ```bash
 npm install
+npm run install-playwright
 ```
 
 ## Run tests
 
-Run the full test suite and generate the JSON report:
+Run the test suite and generate reports:
 
 ```bash
 npm run test
 ```
 
+Current `test` script (example) loads TypeScript step defs and runs the report generator:
+
+```bash
+cucumber-js --require-module ts-node/register/transpile-only \
+  --require support/world.ts --require support/hooks.ts \
+  --require features/step_definitions/**/*.ts \
+  --format json:reports/cucumber_report.json features/**/*.feature && node report/generateReport.js
+```
+
 Notes:
-The test script creates `reports/cucumber_report.json` and runs `src/report/generateReport.js` to produce an HTML report in `reports/html-report`.
-
-## Project structure (important files)
-
-- `src/features/` — Gherkin `.feature` files.
-- `src/steps/` — TypeScript step definitions (`Given/When/Then`).
-- `src/support/world.ts` — Custom `World` where `browser`, `context`, and `page` are stored for scenarios.
-- `src/support/hooks.ts` — Cucumber hooks for setup/teardown.
-- `src/report/generateReport.js` — Report generator which consumes the cucumber JSON.
+- The test runner now cleans previous logs and screenshots at startup. See `support/hooks.ts` and `utils/logger.ts` for implementation details.
+- Reports (JSON + HTML) are written to `reports/`; open `reports/html-report/index.html` to view the HTML report.
 
 ## How step definitions are loaded
 
-Step definitions are expected under `src/steps/**/*.ts` (see `.vscode/settings.json` and `package.json` test script).
+Step definitions are loaded from `features/step_definitions/**/*.ts`. If Cucumber reports an "Undefined step":
 
-If you see an "Undefined step" (for example: `I open the Amazon home page`), ensure:
+- Verify the Gherkin text exactly matches a `Given`/`When`/`Then` pattern in a step file.
+- Ensure the test script requires the correct step definition path (see `package.json` `test` script above).
+- If `ts-node` setup is problematic, a quick JS fallback can be added under `features/step_definitions/` (e.g. `amazonSteps.js`) so Cucumber can load the step directly.
 
-- The step text in the `.feature` exactly matches a `Given/When/Then` in a step file.
-- Your test runner loads TypeScript step files via `ts-node`. The test script uses:
+## Custom World (`support/world.ts`) notes
 
-```
---require-module ts-node/register/transpile-only
-```
-
-## Quick debugging options for "Undefined step"
-
-1. Confirm step file exists and the step uses the exact Gherkin text.
-
-2. Ensure the runner is requiring the step files. The `package.json` test script includes:
-
-```bash
-cucumber-js --require-module ts-node/register/transpile-only --require src/support/world.ts --require src/support/hooks.ts --require src/steps/**/*.ts features/**/*.feature
-```
-
-3. If ts-node configuration is difficult to fix quickly, add a temporary JS stub under `features/step_definitions/` that Cucumber will load directly (example):
-
-```javascript
-// features/step_definitions/amazonSteps.js
-const { Given } = require('@cucumber/cucumber');
-Given('I open the Amazon home page', async function () {
-  if (!this.page) throw new Error('Page not initialized');
-  await this.page.goto('https://www.amazon.com');
-});
-```
-
-## Custom World (`src/support/world.ts`) notes
-
-The `CustomWorld` exposes optional properties:
+The `CustomWorld` exposes optional properties that are created by hooks:
 
 ```ts
 browser?: Browser;
@@ -78,18 +64,21 @@ context?: BrowserContext;
 page?: Page;
 ```
 
-The `?` indicates those properties may be `undefined` until created by hooks. Guard their use in steps (for example: `if (!this.page) throw new Error('Page not initialized')`).
+Guard access to these properties in steps (e.g., `if (!this.page) throw new Error('Page not initialized')`).
 
-## Report viewing
+## Housekeeping behavior
 
-Generated HTML report is placed in `reports/html-report/index.html`. Open this file in a browser to view results.
+- `utils/logger.ts` ensures `reports/logs` exists and removes previous `test.log` and `exceptions.log` at startup so each run begins with fresh logs.
+- `support/hooks.ts` clears `reports/screenshots` at `BeforeAll` so screenshots are from the current run only.
 
 ## Extending the framework
 
-- Add new feature files in `src/features/` and corresponding steps in `src/steps/`.
-- Use `src/support/hooks.ts` to start/close browser or create a new context/page per scenario.
+- Add feature files to `features/` and implement steps in `features/step_definitions/`.
+- Create page objects in `pages/` and reuse them in step definitions.
 
 ## Troubleshooting
 
-- If step autocompletion or mapping in your editor doesn't work, check `.vscode/settings.json` (this repo config points `cucumberautocomplete.steps` to `src/steps/**/*.ts`).
-- If `Undefined step` persists after verifying file locations and step text, run `npm run test` to see which files were loaded.
+- If steps are still undefined, run the `cucumber-js` command shown above locally to see which files are being loaded.
+- Check relative imports in step definition files after moving files — they may need `../../` adjustments.
+
+If you want, I can also add a short CONTRIBUTING section or CI integration next.
