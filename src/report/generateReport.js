@@ -68,7 +68,7 @@ generate({
   metadata: {
     browser: {
       name: "Chrome",
-      version: "143",
+      version: "Latest",
     },
     device: deviceType,
     platform: {
