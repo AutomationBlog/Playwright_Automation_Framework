@@ -13,6 +13,11 @@ Files have been organized at repository root for simplicity. Key folders:
 - `report/` — Report generation script (`generateReport.js`).
 - `reports/` — Generated reports and artifacts (JSON, HTML, screenshots, logs).
 - `utils/` — Helper utilities (logger, json/excel utils).
+- `cucumber.json` — Cucumber configuration file.
+- `support/hooks.ts` — Cucumber hooks for setup/teardown.
+- `support/world.ts` — Cucumber `world` for Playwright.
+- `package.json` — Project configuration.
+- `tsconfig.json` — TypeScript configuration.
 
 ## Prerequisites
 
