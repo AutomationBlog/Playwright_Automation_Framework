@@ -1,12 +1,12 @@
 import { generate } from "multiple-cucumber-html-reporter";
 import path from "path";
-
-const jsonReport = path.join(process.cwd(), "reports", "cucumber_report.json");
-const reportDir = path.join(process.cwd(), "reports", "html-report");
 import fs from "fs";
 import os from "os";
 import child from "child_process";
 import { report } from "process";
+
+const jsonReport = path.join(process.cwd(), "reports", "cucumber_report.json");
+const reportDir = path.join(process.cwd(), "reports", "html-report");
 
 // try to read the logger file and include in report custom data
 let logContents = null;
