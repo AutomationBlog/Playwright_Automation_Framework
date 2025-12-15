@@ -11,6 +11,8 @@ export class HomePage {
     logger.info('[PAGE] HomePage: Navigating to https://www.amazon.com');
     await this.page.goto('https://www.amazon.com', { waitUntil: 'domcontentloaded' });
     logger.info('[PAGE] HomePage: Navigation completed');
+    await this.page.click('button[type="submit"]');
+    logger.info('[PAGE] HomePage: Clicked Continue shopping button if present');
   }
 
   async search(term: string) {
