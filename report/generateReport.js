@@ -1,12 +1,12 @@
-const { generate } = require("multiple-cucumber-html-reporter");
-const path = require("path");
+import { generate } from "multiple-cucumber-html-reporter";
+import path from "path";
 
 const jsonReport = path.join(process.cwd(), "reports", "cucumber_report.json");
 const reportDir = path.join(process.cwd(), "reports", "html-report");
-const fs = require("fs");
-const os = require("os");
-const child = require("child_process");
-const { report } = require("process");
+import fs from "fs";
+import os from "os";
+import child from "child_process";
+import { report } from "process";
 
 // try to read the logger file and include in report custom data
 let logContents = null;
