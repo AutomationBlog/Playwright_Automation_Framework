@@ -97,16 +97,20 @@ If you want, I can also add a short CONTRIBUTING section or CI integration next.
 
 ## Screenshots for reference
 
-## Console Output with logs
+### Console Output with logs
 
 ![Console Output](./asset/console_output.png)
 
+Report generated logs:
 ![Console Output with HTML Report](./asset/console_output_report.png)
 
-## HTML Report with custom logs and screenshots
+### HTML Report with custom logs and screenshots
 
+Features view:
 ![HTML Report view 1](./asset/html_report_1.png)
 
+Scenarios and Steps view:
 ![HTML Report view 2](./asset/html_report_2.png)
 
+Logs and screenshots view:
 ![HTML Report view 3](./asset/html_report_3.png)
