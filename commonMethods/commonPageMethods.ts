@@ -192,8 +192,8 @@ export class CommonPageMethods {
     }
 
     async sleep(milliseconds: number) {
-        return new Promise(resolve => setTimeout(resolve, milliseconds));
         this.loggerInfo(`Sleeping for ${milliseconds} milliseconds`);
+        return new Promise(resolve => setTimeout(resolve, milliseconds));
     }
 
     async getWindowsCount(): Promise<Page[]> {
@@ -256,6 +256,54 @@ export class CommonPageMethods {
         this.loggerInfo(`Retrieved attribute '${attribute}' for element: ${selector}`);
         return await element?.getAttribute(attribute) || null;
     }
+
+    async deleteCookies() {
+        const context = this.page.context();
+        await context.clearCookies();
+        this.loggerInfo('Deleted all cookies');
+    }
+
+    async setCookie(name: string, value: string) {
+        const context = this.page.context();
+        await context.addCookies([{ name, value }]);
+        this.loggerInfo(`Added cookie: ${name}=${value}`);
+    }
+
+    async getConsoleLogs(): Promise<string[]> {
+        const logs: string[] = [];
+        this.page.on('console', message => logs.push(message.text()));
+        this.loggerInfo('Retrieved console logs');
+        return logs;
+    }
+
+    async filterConsoleLogs(keyword: string): Promise<string[]> {
+        const logs: string[] = [];
+        this.page.on('console', message => {
+            if (message.text().includes(keyword)) {
+                logs.push(message.text());
+            }
+        });
+        this.loggerInfo(`Filtered console logs for keyword: ${keyword}`);
+        return logs;
+    }
+
+    // async getNetworkRequests(): Promise<NetworkRequest[]> {
+    //     const requests: NetworkRequest[] = [];
+    //     this.page.on('request', request => requests.push(request));
+    //     this.loggerInfo('Retrieved network requests');
+    //     return requests;
+    // }
+
+    // async filterNetworkRequests(url: string): Promise<NetworkRequest[]> {
+    //     const requests: NetworkRequest[] = [];
+    //     this.page.on('request', request => {
+    //         if (request.url().includes(url)) {
+    //             requests.push(request);
+    //         }
+    //     });
+    //     this.loggerInfo(`Filtered network requests for URL: ${url}`);
+    //     return requests;
+    // }
 
     async excelToJson(filePath: string, sheetName: string): Promise<any[]> { 
         const jsonData = readExcelFile(filePath, sheetName);
