@@ -94,3 +94,15 @@ Guard access to these properties in steps (e.g., `if (!this.page) throw new Erro
 - Check relative imports in step definition files after moving files — they may need `../../` adjustments.
 
 If you want, I can also add a short CONTRIBUTING section or CI integration next.
+
+## Screenshots for reference
+
+![Console Output](./asset/console_output.png)
+
+![Console Output with HTML Report](./asset/console_output_report.png)
+
+![HTML Report view 1](./asset/html_report_1.png)
+
+![HTML Report view 2](./asset/html_report_2.png)
+
+![HTML Report view 3](./asset/html_report_3.png)

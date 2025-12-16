@@ -1,5 +1,4 @@
 import { Page } from 'playwright';
-import logger from '../utils/logger';
 import { SearchResultsPageLocator } from '../pageObjects/SearchResultsPageLocator';
 
 export class SearchResultsPage extends SearchResultsPageLocator {
@@ -10,20 +9,20 @@ export class SearchResultsPage extends SearchResultsPageLocator {
   }
 
   async openFirstResult() {
-    logger.info('[PAGE] SearchResultsPage: Opening first search result');
-    await this.page.waitForSelector(this.resultsContainerSelector);
+    this.loggerInfo('[PAGE] SearchResultsPage: Opening first search result');
+    await this.waitForSelector(this.resultsContainerSelector);
     // Try common product link patterns (product detail pages often contain "/dp/")
-    let first = await this.page.$(this.productLinkSelectorPattern);
+    let first = await this.getElement(this.productLinkSelectorPattern);
     if (!first) {
       // fallback to typical search result heading link
-      first = await this.page.$(this.firstResultSelector);
+      first = await this.getElement(this.firstResultSelector);
     }
     if (!first) {
-      logger.error('[PAGE] SearchResultsPage: No search results found');
+      this.loggerError('[PAGE] SearchResultsPage: No search results found');
       throw new Error('No search results found');
     }
     await first.click();
-    await this.page.waitForLoadState('domcontentloaded');
-    logger.info('[PAGE] SearchResultsPage: First result opened successfully');
+    await this.waitforPageLoad();
+    this.loggerInfo('[PAGE] SearchResultsPage: First result opened successfully');
   }
 }

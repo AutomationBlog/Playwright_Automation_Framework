@@ -1,5 +1,4 @@
 import { Page } from 'playwright';
-import logger from '../utils/logger';
 import { HomePageLocator } from '../pageObjects/HomePageLocator';
 
 export class HomePage extends HomePageLocator {
@@ -10,18 +9,18 @@ export class HomePage extends HomePageLocator {
   }
 
   async open() {
-    logger.info(`[PAGE] HomePage: Navigating to ${this.url}`);
-    await this.page.goto(this.url, { waitUntil: 'domcontentloaded' });
-    logger.info('[PAGE] HomePage: Navigation completed');
+    this.loggerInfo(`[PAGE] HomePage: Navigating to ${this.url}`);
+    await this.navigateTo(this.url);
+    this.loggerInfo('[PAGE] HomePage: Navigation completed');
     await this.page.click(this.continueShoppingButtonSelector);
-    logger.info('[PAGE] HomePage: Clicked Continue shopping button if present');
+    this.loggerInfo('[PAGE] HomePage: Clicked Continue shopping button if present');
   }
 
   async search(term: string) {
-    logger.info(`[PAGE] HomePage: Searching for '${term}'`);
-    await this.page.fill(this.searchInputSelector, term);
-    await this.page.click(this.searchButtonSelector);
-    await this.page.waitForLoadState('domcontentloaded');
-    logger.info(`[PAGE] HomePage: Search completed for '${term}'`);
+    this.loggerInfo(`[PAGE] HomePage: Searching for '${term}'`);
+    await this.waitForSelectorAndSetText(this.searchInputSelector, term);
+    await this.clickElement(this.searchButtonSelector);
+    await this.waitforPageLoad();
+    this.loggerInfo(`[PAGE] HomePage: Search completed for '${term}'`);
   }
 }
