@@ -97,9 +97,13 @@ If you want, I can also add a short CONTRIBUTING section or CI integration next.
 
 ## Screenshots for reference
 
+## Console Output with logs
+
 ![Console Output](./asset/console_output.png)
 
 ![Console Output with HTML Report](./asset/console_output_report.png)
+
+## HTML Report with custom logs and screenshots
 
 ![HTML Report view 1](./asset/html_report_1.png)
 
