@@ -1,5 +1,7 @@
 import { Page } from 'playwright';
 import logger from '../utils/logger';
+import readExcelFile from '../utils/excelUtil';
+import { readJSON, writeJSON } from '../utils/jsonUtil';
 
 export class CommonPageMethods {
     readonly page: Page;
@@ -253,6 +255,23 @@ export class CommonPageMethods {
         const element = await this.page.$(selector);
         this.loggerInfo(`Retrieved attribute '${attribute}' for element: ${selector}`);
         return await element?.getAttribute(attribute) || null;
+    }
+
+    async excelToJson(filePath: string, sheetName: string): Promise<any[]> { 
+        const jsonData = readExcelFile(filePath, sheetName);
+        this.loggerInfo(`Converted Excel to JSON: ${filePath}, Sheet: ${sheetName}`);
+        return jsonData;
+    }
+
+    async readJSONFile(filePath: string): Promise<any> {
+        const jsonData = await readJSON(filePath);
+        this.loggerInfo(`Read JSON file: ${filePath}`);
+        return jsonData;
+    }
+
+    async writeJSONFile(filePath: string, data: any): Promise<void> {
+        await writeJSON(filePath, data);
+        this.loggerInfo(`Wrote JSON file: ${filePath}`);
     }
 
 }

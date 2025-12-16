@@ -7,3 +7,4 @@ export async function readJSON(filePath: string) {
 export async function writeJSON(filePath: string, data: any) {
   return fs.writeJson(filePath, data, { spaces: 2 });
 }
+
