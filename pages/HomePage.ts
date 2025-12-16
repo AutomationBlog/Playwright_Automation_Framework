@@ -12,7 +12,7 @@ export class HomePage extends HomePageLocator {
     this.loggerInfo(`[PAGE] HomePage: Navigating to ${this.url}`);
     await this.navigateTo(this.url);
     this.loggerInfo('[PAGE] HomePage: Navigation completed');
-    await this.page.click(this.continueShoppingButtonSelector);
+    await this.clickElement(this.continueShoppingButtonSelector);
     this.loggerInfo('[PAGE] HomePage: Clicked Continue shopping button if present');
   }
 
