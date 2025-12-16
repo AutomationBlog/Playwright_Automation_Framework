@@ -1,12 +1,18 @@
 import { Given, When, Then } from '@cucumber/cucumber';
 import { expect } from 'chai';
 import logger from '../../utils/logger';
-import { HomePage } from '../../pages/HomePage';
+import { HomePage} from '../../pages/HomePage';
 import { SearchResultsPage } from '../../pages/SearchResultsPage';
 import { ProductPage } from '../../pages/ProductPage';
 import { CartPage } from '../../pages/CartPage';
-// Avoid importing the support world to prevent double-loading Cucumber.
 
+// Example usage
+// import { Page } from 'playwright';
+// let page: Page= <any>{};
+// const home = new HomePage(page);
+
+// Avoid importing the support world to prevent double-loading Cucumber.
+// The 'this' context in step definitions will have the CustomWorld type.
 Given('I open the Amazon home page', async function (this: any) {
   logger.info('[GIVEN] Opening Amazon home page');
   if (!this.page) throw new Error('Page not initialized');
