@@ -1,20 +1,22 @@
 import { Page } from 'playwright';
 import logger from '../utils/logger';
+import { SearchResultsPageLocator } from '../pageObjects/SearchResultsPageLocator';
 
-export class SearchResultsPage {
+export class SearchResultsPage extends SearchResultsPageLocator {
   readonly page: Page;
   constructor(page: Page) {
+    super(page);
     this.page = page;
   }
 
   async openFirstResult() {
     logger.info('[PAGE] SearchResultsPage: Opening first search result');
-    await this.page.waitForSelector('div.s-main-slot');
+    await this.page.waitForSelector(this.resultsContainerSelector);
     // Try common product link patterns (product detail pages often contain "/dp/")
-    let first = await this.page.$('div.s-main-slot a[href*="/dp/"]');
+    let first = await this.page.$(this.productLinkSelectorPattern);
     if (!first) {
       // fallback to typical search result heading link
-      first = await this.page.$('div.s-main-slot div[data-component-type="s-search-result"] h2 a');
+      first = await this.page.$(this.firstResultSelector);
     }
     if (!first) {
       logger.error('[PAGE] SearchResultsPage: No search results found');
