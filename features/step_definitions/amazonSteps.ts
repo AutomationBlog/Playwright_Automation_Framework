@@ -6,11 +6,6 @@ import { SearchResultsPage } from '../../pages/SearchResultsPage';
 import { ProductPage } from '../../pages/ProductPage';
 import { CartPage } from '../../pages/CartPage';
 
-// Example usage
-// import { Page } from 'playwright';
-// let page: Page= <any>{};
-// const home = new HomePage(page);
-
 // Avoid importing the support world to prevent double-loading Cucumber.
 // The 'this' context in step definitions will have the CustomWorld type.
 Given('I open the Amazon home page', async function (this: any) {
