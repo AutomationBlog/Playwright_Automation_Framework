@@ -27,7 +27,7 @@ Files have been organized at repository root for simplicity. Key folders:
 
 - [Playwright Core Library API](https://playwright.dev/docs/api/class-playwright)
 - [Cucumber Documentation](https://cucumber.io/docs)
-- [typescript documentation](https://www.typescriptlang.org/docs/)
+- [TypeScript Documentation](https://www.typescriptlang.org/docs/)
 
 ## Dependencies List
 
