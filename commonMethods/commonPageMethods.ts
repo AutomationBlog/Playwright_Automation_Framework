@@ -134,6 +134,12 @@ export class CommonPageMethods {
         this.loggerInfo(`Waited for selector and double clicked: ${selector}`);
     }
 
+    async cilckElementAndSwitchToChildTab(selector: string){
+        await this.waitForSelectorAndClick(selector);
+        await this.switchToChildWindow(1);
+        this.loggerInfo(`Clicked element and switched to child tab: ${selector}`);
+    }
+
     async waitForSelectorAndRightClick(selector: string) {
         await this.page.waitForSelector(selector);
         await this.page.click(selector, { button: 'right' });
