@@ -1,7 +1,7 @@
 Feature: Amazon add to cart
 
   @smoke
-  Scenario: Search for an item and add first result to cart
+  Scenario: Search for an item and add first result to cart1
     Given I open the Amazon home page
     When I search for "playwright book"
     And I open the first search result
@@ -9,7 +9,7 @@ Feature: Amazon add to cart
     Then the cart should contain at least 1 item
 
   @regression
-  Scenario: Search for an item and add first result to cart
+  Scenario: Search for an item and add first result to cart2
     Given I open the Amazon home page
     When I search for "playwright book"
     And I open the first search result

@@ -41,7 +41,7 @@ npm run test
 Current `test` script (example) loads TypeScript step defs and runs the report generator:
 
 ```bash
-node -e \"require('fs').mkdirSync('reports', { recursive: true })\" && cucumber-js --tags @regression && npm run generate-report
+node -e \"require('fs').mkdirSync('reports', { recursive: true })\" && npx cucumber-js test features/ --tags @regression && npm run generate-report
 ```
 
 Notes:
@@ -52,10 +52,10 @@ Notes:
 ## Running specific scenarios
 
 - Refer to `cucumber.json` documentation for more options: [cucumber-js](https://github.com/cucumber/cucumber-js)
-- If you want to run only a single scenario, use the `--tags` option (e.g., `npm run test -- --tags @regression`).
-- if you want to run only one feature file (e.g., `npm run test -- --tags @regression features/amazon_add_to_cart.feature`).
--if you want to run scenario using feature file and scenario name (e.g., `npm run test -- --tags @regression features/amazon_add_to_cart.feature:Search for an item and add first result to cart`).
-- if you want to run scenario using feature file and scenario line number (e.g., `npm run test -- --tags @regression features/amazon_add_to_cart.feature:4`).
+- If you want to run only a single scenario, use the `--tags` option (e.g., `npx cucumber-js test features/ --tags @regression`).
+- if you want to run only one feature file (e.g., `npx cucumber-js test features/ amazon_add_to_cart.feature`).
+- if you want to run scenario using feature file and scenario name (e.g., `npx cucumber-js test features/ --name \"Search for an item and add first result to cart1\"`).
+- if you want to run scenario using feature file and scenario line number (e.g., `npx cucumber-js test  \"features/amazon_add_to_cart.feature:4\"`).
 
 
 ## How step definitions are loaded
