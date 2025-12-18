@@ -1,14 +1,18 @@
 # Playwright Automation Framework
 
-## Overview
+A Playwright (Core library) + Cucumber (Gherkin) E2E framework using TypeScript.
 
-This repository is a Playwright + Cucumber (Gherkin) E2E framework using TypeScript.
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+
+## Overview
 
 Files have been organized at repository root for simplicity. Key folders:
 
 - `features/` — Gherkin `.feature` files (examples under `features/`).
 - `features/step_definitions/` — TypeScript step definitions (`Given/When/Then`).
-- `pages/` — Page object classes (HomePage, ProductPage, etc.).
+- `pages/` — Page method classes (HomePage, ProductPage, etc.).
+- `pageObjects/` — Page object classes (HomePageLocator, ProductPageLocator, etc.).
+- `commonMethods/commonPageMethods.ts` — has all the common page methods (click, type, etc.)
 - `support/` — Cucumber `world` and `hooks` for setup/teardown.
 - `report/` — Report generation script (`generateReport.js`).
 - `reports/` — Generated reports and artifacts (JSON, HTML, screenshots, logs).
@@ -19,16 +23,45 @@ Files have been organized at repository root for simplicity. Key folders:
 - `package.json` — Project configuration.
 - `tsconfig.json` — TypeScript configuration.
 
+## Tools Documentation
+
+- [Playwright Core Library API](https://playwright.dev/docs/api/class-playwright)
+- [Cucumber Documentation](https://cucumber.io/docs)
+- [typescript documentation](https://www.typescriptlang.org/docs/)
+
+## Dependencies List
+
+- [playwright](https://www.npmjs.com/package/playwright)
+- [typescript](https://www.npmjs.com/package/typescript)
+- [@cucumber/cucumber](https://www.npmjs.com/package/@cucumber/cucumber)
+- [fs-extra](https://www.npmjs.com/package/fs-extra)
+- [multiple-cucumber-html-reporter](https://www.npmjs.com/package/multiple-cucumber-html-reporter)
+- [winston](https://www.npmjs.com/package/winston)
+- [dotenv](https://www.npmjs.com/package/dotenv)
+- [xlsx](https://www.npmjs.com/package/xlsx)
+- [ts-node](https://www.npmjs.com/package/ts-node)
+- [chai](https://www.npmjs.com/package/chai)
+- [@types/chai](https://www.npmjs.com/package/@types/chai)
+- [@types/fs-extra](https://www.npmjs.com/package/@types/fs-extra)
+- [@types/node](https://www.npmjs.com/package/@types/node)
+
 ## Prerequisites
 
-Node.js (14+) and npm
+Node.js (v24.11.1) and npm
 
 Install dependencies:
 
 ```bash
 npm install
+```
+
+![npm install](./asset/npm_install.png)
+
+```bash
 npm run install-playwright
 ```
+
+![npm install](./asset/install_playwright.png)
 
 ## Run tests
 
@@ -44,6 +77,18 @@ Current `test` script (example) loads TypeScript step defs and runs the report g
 node -e \"require('fs').mkdirSync('reports', { recursive: true })\" && npx cucumber-js test features/ --tags @regression && npm run generate-report
 ```
 
+Current `install-playwright` script to install Playwright core library:
+
+```bash
+npx playwright install
+```
+
+Current `generate-report` script to generate HTML report:
+
+```bash
+node report/generateReport.js
+```
+
 Notes:
 
 - The test runner now cleans previous logs and screenshots at startup. See `support/hooks.ts` and `utils/logger.ts` for implementation details.
@@ -56,7 +101,6 @@ Notes:
 - if you want to run only one feature file (e.g., `npx cucumber-js test features/ amazon_add_to_cart.feature`).
 - if you want to run scenario using feature file and scenario name (e.g., `npx cucumber-js test features/ --name \"Search for an item and add first result to cart1\"`).
 - if you want to run scenario using feature file and scenario line number (e.g., `npx cucumber-js test  \"features/amazon_add_to_cart.feature:4\"`).
-
 
 ## How step definitions are loaded
 
