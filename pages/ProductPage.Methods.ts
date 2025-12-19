@@ -1,8 +1,10 @@
 import { Page } from 'playwright';
-import { ProductPageLocator } from '../pageObjects/ProductPageLocator';
+import { ProductPageLocator } from '../pageObjects/ProductPage.Locators';
+import { CommonPageMethods } from '../commonMethods/commonPageMethods';
 
-export class ProductPage extends ProductPageLocator {
+export class ProductPage extends CommonPageMethods {
   readonly page: Page;
+  readonly ProductPageLocator: ProductPageLocator = new ProductPageLocator();
   constructor(page: Page) {
     super(page);
     this.page = page;
@@ -11,7 +13,7 @@ export class ProductPage extends ProductPageLocator {
   async addToCart() {
     this.loggerInfo('[PAGE] ProductPage: Attempting to add product to cart');
     // Try common Amazon add-to-cart selectors
-    const selectors = [this.addToCartButtonSelector];
+    const selectors = [this.ProductPageLocator.addToCartButtonSelector];
     for (const sel of selectors) {
       const el = await this.getElement(sel);
       if (el) {

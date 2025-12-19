@@ -11,6 +11,14 @@
     "resolveJsonModule": true,
     "types": ["node"]
   },
-  "include": ["**/*.ts", "features/**/*.ts"],
+  "include": ["**/*.ts", 
+  "features/**/*.ts", 
+  "pages/**/*.ts", 
+  "commonMethods/**/*.ts", 
+  "utils/**/*.ts", 
+  "pageObjects/**/*.ts", 
+  "support/**/*.ts", 
+  "zExternal_Input_Files/**/*.ts", 
+  "zExternal_Input_Files/**/*.json"],
   "exclude": ["node_modules"]
 }

@@ -1,10 +1,10 @@
 import { Given, When, Then } from '@cucumber/cucumber';
 import { expect } from 'chai';
 import logger from '../../utils/logger';
-import { HomePage} from '../../pages/HomePage';
-import { SearchResultsPage } from '../../pages/SearchResultsPage';
-import { ProductPage } from '../../pages/ProductPage';
-import { CartPage } from '../../pages/CartPage';
+import { HomePage} from '../../pages/HomePage.Methods';
+import { SearchResultsPage } from '../../pages/SearchResultsPage.Methods';
+import { ProductPage } from '../../pages/ProductPage.Methods';
+import { CartPage } from '../../pages/CartPage.Methods';
 
 // Avoid importing the support world to prevent double-loading Cucumber.
 // The 'this' context in step definitions will have the CustomWorld type.
