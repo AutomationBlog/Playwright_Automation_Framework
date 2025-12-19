@@ -1,5 +1,4 @@
 import { Page } from 'playwright';
-import logger from '../utils/logger';
 import { CommonPageMethods } from '../commonMethods/commonPageMethods';
 
 export class CartPageLocator extends CommonPageMethods{
