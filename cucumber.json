@@ -14,7 +14,8 @@
             "ts-node/register/transpile-only"
         ],
         "format": [
-            "json:reports/cucumber_report.json"
+            "json:reports/cucumber_report.json",
+            "html:reports/cucumber_report.html"
         ]
     }
 }
