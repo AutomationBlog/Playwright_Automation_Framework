@@ -42,6 +42,12 @@ export class CommonPageMethods {
         return await element?.textContent() || '';
     }
 
+    async getElementUsingLocator(selector: string) {
+        await this.page.waitForSelector(selector);
+        this.loggerInfo(`Element located: ${selector}`);
+        return this.page.locator(selector);
+    }
+
     async getElement(selector: string) {
         await this.page.waitForSelector(selector);
         this.loggerInfo(`Element found: ${selector}`);
