@@ -91,12 +91,12 @@ node report/generateReport.js
 
 Notes:
 
+- Refer to `cucumber.json` documentation for more options: [cucumber-js](https://github.com/cucumber/cucumber-js)
 - The test runner now cleans previous logs and screenshots at startup. See `support/hooks.ts` and `utils/logger.ts` for implementation details.
 - Reports (JSON + HTML) are written to `reports/`; open `reports/html-report/index.html` to view the HTML report.
 
 ## Running specific scenarios
 
-- Refer to `cucumber.json` documentation for more options: [cucumber-js](https://github.com/cucumber/cucumber-js)
 - If you want to run only a single scenario, use the `--tags` option (e.g., `npx cucumber-js test features/ --tags @regression`).
 - if you want to run only one feature file (e.g., `npx cucumber-js test features/ amazon_add_to_cart.feature`).
 - if you want to run scenario using feature file and scenario name (e.g., `npx cucumber-js test features/ --name \"Search for an item and add first result to cart1\"`).
