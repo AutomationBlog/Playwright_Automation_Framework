@@ -31,6 +31,10 @@ async function getMostPopularURL(logFileURL) {
   const response = await fetch(logFileURL);
   const text = await response.text();
 
+  //Step 1 alternative using axios:
+  // const response = await axios.get(logFileURL, { responseType: "text" });
+  // const text = response.data;
+
   // Step 2: Parse into clean lines
   const urls = text.split("\n").filter(Boolean);
 
